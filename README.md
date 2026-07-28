@@ -29,8 +29,9 @@ The complete framework consists of four stages:
 3. Patch refinement network
 4. Patch reconstruction and majority voting
 
-
-
+<p align="center">
+<img src="figures/workflow.png" width="100%">
+</p>
 ---
 
 ## Boundary Refinement Strategy
@@ -40,6 +41,10 @@ The proposed method only refines pixels located around tumour boundaries.
 The coarse segmentation is first converted into a boundary map. Image patches centred on boundary pixels are extracted together with their corresponding coarse segmentation masks. Both inputs are fed into the Boundary Refinement Network, which predicts refined tumour boundaries.
 
 After all boundary patches have been processed, the refined patches are stitched back into the original image using an overlapping voting strategy to generate the final tumour segmentation.
+
+<p align="center">
+<img src="figures/architecture.png" width="100%">
+</p>
 
 ---
 
@@ -102,14 +107,24 @@ During inference:
 
 ## Experimental Results
 
-The proposed Boundary Refinement Network improves segmentation performance by refining tumour boundaries while preserving the global tumour shape.
+Quantitative comparisons with several state-of-the-art liver tumour segmentation methods on the LiTS dataset are shown below.
 
-The method demonstrates improvements in:
+<p align="center">
+<img src="figures/results.png" width="85%">
+</p>
 
-- Dice Similarity Coefficient (DSC)
-- Average Symmetric Surface Distance (ASSD)
-- Maximum Surface Distance (MSD)
+The proposed Boundary Refinement Network further improves the coarse segmentation results, achieving better boundary accuracy while maintaining competitive Dice performance.
 
-compared with the coarse segmentation.
 
 ---
+## Visualisation
+
+Examples of boundary refinement results are shown below.
+
+Green contours denote the ground truth, while yellow contours denote the refined segmentation produced by the proposed Boundary Refinement Network.
+
+<p align="center">
+<img src="figures/visualization.png" width="70%">
+</p>
+
+The proposed method is able to recover more accurate tumour boundaries for both large and small lesions.
